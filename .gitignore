@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.tmp
+*.env
+.venv/
+venv/
+ENV/
+
+# Data runtime files (optional to track or ignore, keeping data/ template)
+data/*.tmp
+data/question_cache.json
+data/question_history.json
+
+# OS files
+.DS_Store
+Thumbs.db

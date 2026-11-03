@@ -1,0 +1,2 @@
+# Interactive Quiz Station Dependencies
+pyserial>=3.5
