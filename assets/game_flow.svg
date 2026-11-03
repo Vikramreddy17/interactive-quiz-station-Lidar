@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050e1d"/>
+      <stop offset="100%" stop-color="#07172b"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#142c4c"/>
+      <stop offset="100%" stop-color="#0d1e35"/>
+    </linearGradient>
+  </defs>
+
+  <style>
+    .title { font: 900 22px 'Segoe UI', Arial, sans-serif; fill: #ffffff; }
+    .step-num { font: 900 13px 'Segoe UI', Arial, sans-serif; fill: #4bdfee; letter-spacing: 1px; }
+    .card-title { font: 800 14px 'Segoe UI', Arial, sans-serif; fill: #f0f7ff; }
+    .card-text { font: 400 11.5px 'Segoe UI', Arial, sans-serif; fill: #a5c2df; line-height: 1.4; }
+  </style>
+
+  <rect width="1100" height="420" rx="14" fill="url(#bg)" stroke="#234368" stroke-width="2"/>
+
+  <!-- Title -->
+  <text x="40" y="45" class="title">🎮 PLAYER JOURNEY &amp; SCREEN FLOW (7 SCREENS)</text>
+  <text x="40" y="70" font-family="'Segoe UI', Arial" font-size="13" fill="#8faecf">Touch-enabled interactive progression from welcome attraction to Hall of Fame leaderboard</text>
+
+  <!-- Step 1: Welcome -->
+  <g transform="translate(35, 100)">
+    <rect width="135" height="280" rx="12" fill="url(#card)" stroke="#35567b" stroke-width="1.5"/>
+    <rect x="12" y="15" width="111" height="24" rx="6" fill="#1b395e"/>
+    <text x="25" y="32" class="step-num">STEP 01</text>
+    <text x="14" y="65" class="card-title">WELCOME</text>
+    <text x="14" y="90" class="card-text">• Idle attraction</text>
+    <text x="14" y="110" class="card-text">• "START CHALLENGE"</text>
+    <text x="14" y="130" class="card-text">• Top 5 preview</text>
+    <text x="14" y="150" class="card-text">• View Hall of Fame</text>
+    <circle cx="67" cy="225" r="24" fill="#1b3a5c"/>
+    <text x="59" y="233" font-size="20">🏆</text>
+  </g>
+
+  <!-- Step 2: Registration -->
+  <g transform="translate(185, 100)">
+    <rect width="135" height="280" rx="12" fill="url(#card)" stroke="#4bdfee" stroke-width="1.5"/>
+    <rect x="12" y="15" width="111" height="24" rx="6" fill="#144d66"/>
+    <text x="25" y="32" class="step-num">STEP 02</text>
+    <text x="14" y="65" class="card-title">REGISTER</text>
+    <text x="14" y="90" class="card-text">• Touch keyboard</text>
+    <text x="14" y="110" class="card-text">• Enter player name</text>
+    <text x="14" y="130" class="card-text">• Max 24 chars</text>
+    <text x="14" y="150" class="card-text">• Delete &amp; Clear keys</text>
+    <circle cx="67" cy="225" r="24" fill="#164d62"/>
+    <text x="59" y="233" font-size="20">⌨️</text>
+  </g>
+
+  <!-- Step 3: Category -->
+  <g transform="translate(335, 100)">
+    <rect width="135" height="280" rx="12" fill="url(#card)" stroke="#38e5b0" stroke-width="1.5"/>
+    <rect x="12" y="15" width="111" height="24" rx="6" fill="#144d41"/>
+    <text x="25" y="32" class="step-num" fill="#38e5b0">STEP 03</text>
+    <text x="14" y="65" class="card-title">CATEGORY</text>
+    <text x="14" y="90" class="card-text">• ⚡ Tech &amp; AI</text>
+    <text x="14" y="110" class="card-text">• ✦ Design &amp; Art</text>
+    <text x="14" y="130" class="card-text">• 🌍 World &amp; History</text>
+    <text x="14" y="150" class="card-text">• Big visual cards</text>
+    <circle cx="67" cy="225" r="24" fill="#164e43"/>
+    <text x="59" y="233" font-size="20">🎨</text>
+  </g>
+
+  <!-- Step 4: Difficulty -->
+  <g transform="translate(485, 100)">
+    <rect width="135" height="280" rx="12" fill="url(#card)" stroke="#ffd071" stroke-width="1.5"/>
+    <rect x="12" y="15" width="111" height="24" rx="6" fill="#4d3e16"/>
+    <text x="25" y="32" class="step-num" fill="#ffd071">STEP 04</text>
+    <text x="14" y="65" class="card-title">DIFFICULTY</text>
+    <text x="14" y="90" class="card-text">• 🌱 Easy (Explorer)</text>
+    <text x="14" y="110" class="card-text">• ⚡ Medium</text>
+    <text x="14" y="130" class="card-text">• 🔥 Hard (Master)</text>
+    <text x="14" y="150" class="card-text">• Loads 20 questions</text>
+    <circle cx="67" cy="225" r="24" fill="#4a3e1a"/>
+    <text x="59" y="233" font-size="20">⚡</text>
+  </g>
+
+  <!-- Step 5: Quiz -->
+  <g transform="translate(635, 100)">
+    <rect width="145" height="280" rx="12" fill="url(#card)" stroke="#ff7187" stroke-width="2"/>
+    <rect x="12" y="15" width="121" height="24" rx="6" fill="#4d1a25"/>
+    <text x="32" y="32" class="step-num" fill="#ff7187">STEP 05</text>
+    <text x="14" y="65" class="card-title">QUIZ ARENA</text>
+    <text x="14" y="90" class="card-text">• 20 Questions</text>
+    <text x="14" y="110" class="card-text">• 15s Timer Ring</text>
+    <text x="14" y="130" class="card-text">• Speed Bonus points</text>
+    <text x="14" y="150" class="card-text">• Color Feedback</text>
+    <text x="14" y="170" class="card-text">• Balanced 5 A/B/C/D</text>
+    <circle cx="72" cy="225" r="24" fill="#4d1b26"/>
+    <text x="64" y="233" font-size="20">⏱️</text>
+  </g>
+
+  <!-- Step 6: Results -->
+  <g transform="translate(795, 100)">
+    <rect width="135" height="280" rx="12" fill="url(#card)" stroke="#38e5b0" stroke-width="1.5"/>
+    <rect x="12" y="15" width="111" height="24" rx="6" fill="#144d41"/>
+    <text x="25" y="32" class="step-num" fill="#38e5b0">STEP 06</text>
+    <text x="14" y="65" class="card-title">RESULTS</text>
+    <text x="14" y="90" class="card-text">• Final Score</text>
+    <text x="14" y="110" class="card-text">• Accuracy %</text>
+    <text x="14" y="130" class="card-text">• Correct vs Wrong</text>
+    <text x="14" y="150" class="card-text">• Total Time used</text>
+    <text x="14" y="170" class="card-text">• 6s auto countdown</text>
+    <circle cx="67" cy="225" r="24" fill="#154d3f"/>
+    <text x="59" y="233" font-size="20">📊</text>
+  </g>
+
+  <!-- Step 7: Leaderboard -->
+  <g transform="translate(945, 100)">
+    <rect width="125" height="280" rx="12" fill="url(#card)" stroke="#ffd071" stroke-width="1.5"/>
+    <rect x="12" y="15" width="101" height="24" rx="6" fill="#4d3e16"/>
+    <text x="20" y="32" class="step-num" fill="#ffd071">STEP 07</text>
+    <text x="14" y="65" class="card-title">LEADERBOARD</text>
+    <text x="14" y="90" class="card-text">• Top 10 Hall</text>
+    <text x="14" y="110" class="card-text">• Ranks &amp; Medals</text>
+    <text x="14" y="130" class="card-text">• "NEXT PLAYER"</text>
+    <text x="14" y="150" class="card-text">• "DONE" Button</text>
+    <text x="14" y="170" class="card-text">• Protected PIN</text>
+    <circle cx="62" cy="225" r="24" fill="#4a3e1a"/>
+    <text x="54" y="233" font-size="20">🥇</text>
+  </g>
+
+  <!-- Connectors -->
+  <polygon points="174,240 181,240 177,246" fill="#4bdfee" transform="rotate(-90 177 240)"/>
+  <polygon points="324,240 331,240 327,246" fill="#4bdfee" transform="rotate(-90 327 240)"/>
+  <polygon points="474,240 481,240 477,246" fill="#4bdfee" transform="rotate(-90 477 240)"/>
+  <polygon points="624,240 631,240 627,246" fill="#4bdfee" transform="rotate(-90 627 240)"/>
+  <polygon points="784,240 791,240 787,246" fill="#4bdfee" transform="rotate(-90 787 240)"/>
+  <polygon points="934,240 941,240 937,246" fill="#4bdfee" transform="rotate(-90 937 240)"/>
+</svg>

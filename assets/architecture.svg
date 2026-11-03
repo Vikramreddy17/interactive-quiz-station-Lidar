@@ -1,0 +1,168 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 640" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050e1d"/>
+      <stop offset="50%" stop-color="#0a1b33"/>
+      <stop offset="100%" stop-color="#040a16"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#142c4b"/>
+      <stop offset="100%" stop-color="#0d1e35"/>
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#49eaf6"/>
+      <stop offset="100%" stop-color="#2a9df4"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd071"/>
+      <stop offset="100%" stop-color="#e8982c"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38e5b0"/>
+      <stop offset="100%" stop-color="#199e74"/>
+    </linearGradient>
+    <linearGradient id="pinkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff7187"/>
+      <stop offset="100%" stop-color="#d43f58"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    .title { font: 900 24px 'Segoe UI', Arial, sans-serif; fill: #ffffff; letter-spacing: 1px; }
+    .subtitle { font: 500 13px 'Segoe UI', Arial, sans-serif; fill: #8faecf; }
+    .box-title { font: 700 15px 'Segoe UI', Arial, sans-serif; fill: #4bdfee; }
+    .box-desc { font: 400 12px 'Segoe UI', Arial, sans-serif; fill: #adc4dd; }
+    .pill-text { font: 700 11px 'Segoe UI', Arial, sans-serif; fill: #071225; }
+    .badge { font: 700 11px 'Segoe UI', Arial, sans-serif; fill: #ffd071; }
+    .wire { stroke: #3a628a; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .wire-active { stroke: #4bdfee; stroke-width: 2.5; fill: none; }
+  </style>
+
+  <!-- Background -->
+  <rect width="1100" height="640" rx="16" fill="url(#bg)" stroke="#234368" stroke-width="2"/>
+
+  <!-- Top Header -->
+  <g transform="translate(40, 45)">
+    <rect x="0" y="0" width="38" height="38" rx="10" fill="url(#cyanGrad)" />
+    <text x="12" y="26" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="22" fill="#071225">Q</text>
+    <text x="50" y="24" class="title">QUIZ ARENA — HARDWARE &amp; SOFTWARE ARCHITECTURE</text>
+    <text x="50" y="42" class="subtitle">Real-time LD19 LiDAR touch tracking + Python event server + Vanilla JS interactive stage</text>
+  </g>
+
+  <!-- Section 1: Physical Wall -->
+  <g transform="translate(40, 110)">
+    <rect width="230" height="235" rx="14" fill="url(#cardGrad)" stroke="#35567b" stroke-width="1.5"/>
+    <rect x="15" y="15" width="200" height="26" rx="6" fill="#1b395e"/>
+    <text x="25" y="32" class="box-title">🏛️ PHYSICAL SETUP</text>
+    <text x="15" y="65" class="box-desc">• Wall: 149" W × 80" H</text>
+    <text x="15" y="87" class="box-desc">• Active Area: 141" W</text>
+    <text x="15" y="109" class="box-desc">• Dead Zones: 4" Left &amp; Right</text>
+    <text x="15" y="131" class="box-desc">• Projector: Ultra-Short Throw</text>
+    <text x="15" y="153" class="box-desc">• Sensor: LDROBOT LD19</text>
+    <text x="15" y="175" class="box-desc">• Sensor Position: Y = 38"</text>
+    <rect x="15" y="195" width="200" height="26" rx="6" fill="#12253d" stroke="#4bdfee" stroke-width="1"/>
+    <text x="32" y="212" font-family="'Segoe UI', Arial" font-size="11" font-weight="700" fill="#4bdfee">Touch Plane: 1490×800 px</text>
+  </g>
+
+  <!-- Section 2: LiDAR Controller (lidar.py) -->
+  <g transform="translate(310, 110)">
+    <rect width="230" height="235" rx="14" fill="url(#cardGrad)" stroke="#38e5b0" stroke-width="1.5"/>
+    <rect x="15" y="15" width="200" height="26" rx="6" fill="#144d41"/>
+    <text x="25" y="32" font-family="'Segoe UI', Arial" font-weight="700" font-size="14" fill="#38e5b0">⚙️ LIDAR.PY CONTROLLER</text>
+    <text x="15" y="65" class="box-desc">• Serial: COM7 @ 230400 baud</text>
+    <text x="15" y="87" class="box-desc">• 47-Byte Packet &amp; CRC8 check</text>
+    <text x="15" y="109" class="box-desc">• Polar to Cartesian mapping</text>
+    <text x="15" y="131" class="box-desc">• Euclidean point clustering</text>
+    <text x="15" y="153" class="box-desc">• Touch state machine tracking</text>
+    <text x="15" y="175" class="box-desc">• Tkinter visualizer &amp; simulator</text>
+    <rect x="15" y="195" width="200" height="26" rx="6" fill="#103a32"/>
+    <text x="25" y="212" font-family="'Segoe UI', Arial" font-size="11" font-weight="700" fill="#38e5b0">UDP Emitter: Port 5005</text>
+  </g>
+
+  <!-- Section 3: Server (server.py) -->
+  <g transform="translate(580, 110)">
+    <rect width="230" height="235" rx="14" fill="url(#cardGrad)" stroke="#4bdfee" stroke-width="1.5"/>
+    <rect x="15" y="15" width="200" height="26" rx="6" fill="#154f66"/>
+    <text x="25" y="32" class="box-title">🚀 PYTHON SERVER.PY</text>
+    <text x="15" y="65" class="box-desc">• Threading HTTP Server (8000)</text>
+    <text x="15" y="87" class="box-desc">• UDP Listener on 127.0.0.1:5005</text>
+    <text x="15" y="109" class="box-desc">• Server-Sent Events (/api/events)</text>
+    <text x="15" y="131" class="box-desc">• Leaderboard store (JSON)</text>
+    <text x="15" y="153" class="box-desc">• Score saving &amp; sorting API</text>
+    <text x="15" y="175" class="box-desc">• Protected Admin Reset (PIN)</text>
+    <rect x="15" y="195" width="200" height="26" rx="6" fill="#133d52"/>
+    <text x="30" y="212" font-family="'Segoe UI', Arial" font-size="11" font-weight="700" fill="#4bdfee">REST &amp; SSE Real-Time Hub</text>
+  </g>
+
+  <!-- Section 4: Game UI (index.html) -->
+  <g transform="translate(850, 110)">
+    <rect width="210" height="235" rx="14" fill="url(#cardGrad)" stroke="#ffd071" stroke-width="1.5"/>
+    <rect x="15" y="15" width="180" height="26" rx="6" fill="#4a3b17"/>
+    <text x="25" y="32" font-family="'Segoe UI', Arial" font-weight="700" font-size="14" fill="#ffd071">💻 FRONTEND UI</text>
+    <text x="15" y="65" class="box-desc">• Fullscreen Stage (F11)</text>
+    <text x="15" y="87" class="box-desc">• 7 Responsive Screens</text>
+    <text x="15" y="109" class="box-desc">• Touch Hit-Testing</text>
+    <text x="15" y="131" class="box-desc">• On-Screen Keyboard</text>
+    <text x="15" y="153" class="box-desc">• 15s Conic Timer Ring</text>
+    <text x="15" y="175" class="box-desc">• Champions Leaderboard</text>
+    <rect x="15" y="195" width="180" height="26" rx="6" fill="#3a2f15"/>
+    <text x="25" y="212" font-family="'Segoe UI', Arial" font-size="11" font-weight="700" fill="#ffd071">EventSource SSE Client</text>
+  </g>
+
+  <!-- Section 5: Question Provider (Bottom Bar) -->
+  <g transform="translate(40, 385)">
+    <rect width="1020" height="215" rx="14" fill="url(#cardGrad)" stroke="#3f6085" stroke-width="1.5"/>
+    <rect x="25" y="18" width="970" height="30" rx="6" fill="#19375b"/>
+    <text x="40" y="38" class="box-title">🧠 QUESTION PROVIDER ENGINE (question_provider.py)</text>
+
+    <!-- Sub column 1 -->
+    <g transform="translate(40, 65)">
+      <text x="0" y="20" font-family="'Segoe UI', Arial" font-size="14" font-weight="700" fill="#ffd071">1. Question Sources</text>
+      <text x="0" y="42" class="box-desc">• The Trivia API v2 (Online REST)</text>
+      <text x="0" y="62" class="box-desc">• Category &amp; Difficulty filtering</text>
+      <text x="0" y="82" class="box-desc">• 180+ Curated Offline Fallbacks</text>
+      <text x="0" y="102" class="box-desc">• Zero-Downtime Reliability</text>
+    </g>
+
+    <!-- Sub column 2 -->
+    <g transform="translate(380, 65)">
+      <text x="0" y="20" font-family="'Segoe UI', Arial" font-size="14" font-weight="700" fill="#4bdfee">2. Cache &amp; Repeat Guard</text>
+      <text x="0" y="42" class="box-desc">• data/question_cache.json store</text>
+      <text x="0" y="62" class="box-desc">• Fixes incorrect_answers key bug</text>
+      <text x="0" y="82" class="box-desc">• Isolated per (Category × Difficulty)</text>
+      <text x="0" y="102" class="box-desc">• Limits repeats to ≤ 5 per game</text>
+    </g>
+
+    <!-- Sub column 3 -->
+    <g transform="translate(720, 65)">
+      <text x="0" y="20" font-family="'Segoe UI', Arial" font-size="14" font-weight="700" fill="#38e5b0">3. Answer Distribution</text>
+      <text x="0" y="42" class="box-desc">• Exactly 5 correct answers in A</text>
+      <text x="0" y="42" class="box-desc">• Exactly 5 correct answers in B</text>
+      <text x="0" y="62" class="box-desc">• Exactly 5 correct answers in B</text>
+      <text x="0" y="82" class="box-desc">• Exactly 5 correct answers in C</text>
+      <text x="0" y="102" class="box-desc">• Exactly 5 correct answers in D</text>
+    </g>
+  </g>
+
+  <!-- Flow Arrows -->
+  <!-- Wall to Lidar -->
+  <path d="M 270 225 L 310 225" class="wire-active" marker-end="url(#arrow)" />
+  <polygon points="305,221 313,225 305,229" fill="#4bdfee"/>
+
+  <!-- Lidar to Server -->
+  <path d="M 540 225 L 580 225" class="wire-active" />
+  <polygon points="575,221 583,225 575,229" fill="#4bdfee"/>
+
+  <!-- Server to Frontend -->
+  <path d="M 810 225 L 850 225" class="wire-active" />
+  <polygon points="845,221 853,225 845,229" fill="#4bdfee"/>
+
+  <!-- Question Provider to Server -->
+  <path d="M 695 385 L 695 350" class="wire-active" />
+  <polygon points="691,355 695,347 699,355" fill="#4bdfee"/>
+
+</svg>

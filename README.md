@@ -10,42 +10,47 @@ Designed for museum exhibits, science centers, interactive brand activations, co
 
 ### 1. Complete System Architecture
 
+![System Architecture](assets/architecture.svg)
+
+<details>
+<summary><b>Click to view Mermaid Diagram Source</b></summary>
+
 ```mermaid
 flowchart TB
-    subgraph Physical_Installation["🏛️ Physical Installation (149\" × 80\" Wall)"]
-        Wall["📽️ Projection Surface (1490 × 800 px Stage)"]
-        UserTouch["👆 User Physical Touch / Hand Tap"]
-        LiDAR["📡 LDROBOT LD19 LiDAR (COM7, 230400 Baud)"]
-        Projector["📽️ Short-Throw / Ultra-Short-Throw Projector"]
+    subgraph Physical_Installation["Physical Installation (149 x 80 Wall)"]
+        Wall["Projection Surface (1490 x 800 px Stage)"]
+        UserTouch["User Physical Touch or Hand Tap"]
+        LiDAR["LDROBOT LD19 LiDAR (COM7, 230400 Baud)"]
+        Projector["Short-Throw or Ultra-Short-Throw Projector"]
     end
 
-    subgraph Hardware_Controller["⚙️ Python Hardware Controller (lidar.py)"]
+    subgraph Hardware_Controller["Python Hardware Controller (lidar.py)"]
         SerialReader["Serial Reader (47-byte Packets, CRC8)"]
-        CoordinateMapper["Polar to Cartesian Transform (Inches & MM)"]
-        DeadzoneFilter["Deadzone Filter (4\" Left & Right Bounds)"]
-        ClusterTracker["Cluster Tracker & Touch ID State Machine"]
-        TkinterGUI["🖥️ Tkinter Wall Calibration & Simulation Monitor"]
+        CoordinateMapper["Polar to Cartesian Transform (Inches and MM)"]
+        DeadzoneFilter["Deadzone Filter (4-inch Left and Right Bounds)"]
+        ClusterTracker["Cluster Tracker and Touch ID State Machine"]
+        TkinterGUI["Tkinter Wall Calibration and Simulation Monitor"]
         UDPSender["UDP Socket Emitter (Port 5005)"]
     end
 
-    subgraph Backend_Server["🚀 Python Backend Server (server.py)"]
+    subgraph Backend_Server["Python Backend Server (server.py)"]
         UDPReceiver["UDP Event Ingest (Port 5005)"]
         SSEStreamer["SSE Event Streamer (/api/events)"]
         APIRouter["REST API Engine (/api/questions, /api/scores)"]
         LeaderboardEngine["Leaderboard Store (data/leaderboard.json)"]
-        AdminReset["🔐 Admin PIN Verification (/api/admin/leaderboard)"]
+        AdminReset["Admin PIN Verification (/api/admin/leaderboard)"]
     end
 
-    subgraph Question_Provider["🧠 Question Provider Engine (question_provider.py)"]
-        TriviaAPI["🌐 The Trivia API v2 (Science, Arts, General)"]
-        CacheLayer["💾 Persistent Cache (data/question_cache.json)"]
-        RepeatGuard["🛡️ Repeat Guard (Max 5 Repeats / Session)"]
-        AnswerBalancer["⚖️ Balanced Answer Distributer (5 A's, 5 B's, 5 C's, 5 D's)"]
-        FallbackPool["📦 180+ Curated Offline Fallback Questions"]
+    subgraph Question_Provider["Question Provider Engine (question_provider.py)"]
+        TriviaAPI["The Trivia API v2 (Science, Arts, General)"]
+        CacheLayer["Persistent Cache (data/question_cache.json)"]
+        RepeatGuard["Repeat Guard (Max 5 Repeats per Session)"]
+        AnswerBalancer["Balanced Answer Distributer (5 A, 5 B, 5 C, 5 D)"]
+        FallbackPool["180+ Curated Offline Fallback Questions"]
     end
 
-    subgraph Display_Client["💻 Front-End Game UI (index.html)"]
-        BrowserWindow["🖥️ Chrome Fullscreen (F11)"]
+    subgraph Display_Client["Front-End Game UI (index.html)"]
+        BrowserWindow["Chrome Fullscreen (F11)"]
         EventSourceClient["SSE Client (EventSource)"]
         HitTester["Touch Coordinate Hit-Tester (x_norm, y_norm)"]
         StageManager["7-Screen Dynamic State Machine"]
@@ -55,7 +60,7 @@ flowchart TB
     LiDAR -->|Serial Data Stream| SerialReader
     SerialReader --> CoordinateMapper --> DeadzoneFilter --> ClusterTracker
     ClusterTracker --> TkinterGUI
-    ClusterTracker -->|touch_down / touch_move / touch_up| UDPSender
+    ClusterTracker -->|touch_down, touch_move, touch_up| UDPSender
     UDPSender -->|JSON Packets| UDPReceiver
     UDPReceiver -->|Broadcast Events| SSEStreamer
     SSEStreamer -->|Real-time SSE data| EventSourceClient
@@ -64,83 +69,82 @@ flowchart TB
     TriviaAPI -.->|Dynamic Questions| Question_Provider
     FallbackPool -.->|Offline Mode| Question_Provider
     Question_Provider --> AnswerBalancer --> APIRouter
-    APIRouter <-->|Questions & Scores| BrowserWindow
+    APIRouter <-->|Questions and Scores| BrowserWindow
     BrowserWindow -->|Displays Visual Output| Projector
     Projector -->|Projects Game| Wall
 ```
+
+</details>
 
 ---
 
 ### 2. Player Journey & Screen State Flow
 
+![Player Journey Flow](assets/game_flow.svg)
+
+<details>
+<summary><b>Click to view State Diagram Source</b></summary>
+
 ```mermaid
 stateDiagram-v2
-    [*] --> WelcomeScreen: Projector starts up
+    [*] --> WelcomeScreen
 
     state WelcomeScreen {
         [*] --> IdleDisplay
-        IdleDisplay --> PreviewLeaderboard: Displays Top 5 Champions
-        IdleDisplay --> StartChallenge: Touch "START CHALLENGE"
+        IdleDisplay --> PreviewLeaderboard
+        IdleDisplay --> StartChallenge
     }
 
     state RegistrationScreen {
-        StartChallenge --> VirtualKeyboard: Enter Player Name (Up to 24 chars)
-        VirtualKeyboard --> ValidateName: Press "CONTINUE"
-        ValidateName --> VirtualKeyboard: Error (Empty Name)
+        StartChallenge --> VirtualKeyboard
+        VirtualKeyboard --> ValidateName
+        ValidateName --> VirtualKeyboard: Error
     }
 
     state CategoryScreen {
-        ValidateName --> ChooseCategory: Choose Domain
-        note right of ChooseCategory
-            1. ⚡ TECH & INNOVATION
-            2. ✦ DESIGN & CREATIVITY
-            3. 🌍 WORLD & WONDERS
-        end note
-        ChooseCategory --> CategorySelected: Touch Category Card
+        ValidateName --> ChooseCategory
+        ChooseCategory --> CategorySelected
     }
 
     state DifficultyScreen {
-        CategorySelected --> ChooseDifficulty: Choose Level
-        note right of ChooseDifficulty
-            🌱 EASY (The Explorer)
-            ⚡ MEDIUM (The Challenger)
-            🔥 HARD (The Master)
-        end note
-        ChooseDifficulty --> PrepareQuestions: Touch "BEGIN QUIZ"
+        CategorySelected --> ChooseDifficulty
+        ChooseDifficulty --> PrepareQuestions
     }
 
     state QuizScreen {
-        PrepareQuestions --> QuestionLoop: Load 20 Balanced Questions
+        PrepareQuestions --> QuestionLoop
         state QuestionLoop {
-            [*] --> QuestionTimer: 15-Second Circular Progress Ring
-            QuestionTimer --> TouchOption: Touch A, B, C, or D
-            QuestionTimer --> Timeout: 15s Elapsed (Unanswered)
-            TouchOption --> Feedback: Color Flash (Green = Correct, Red = Wrong)
-            Timeout --> NextQuestion: Auto advance after 250ms
-            Feedback --> NextQuestion: Auto advance after 800ms
+            [*] --> QuestionTimer
+            QuestionTimer --> TouchOption
+            QuestionTimer --> Timeout: 15s Elapsed
+            TouchOption --> Feedback
+            Timeout --> NextQuestion: Auto advance
+            Feedback --> NextQuestion: Auto advance
         }
     }
 
     state ResultsScreen {
-        NextQuestion --> SummaryDisplay: 20 Questions Completed
-        SummaryDisplay --> AutoCountdown: 6-Second Score Review & Accuracy
-        SummaryDisplay --> SaveScore: POST /api/scores
+        NextQuestion --> SummaryDisplay: 20 Questions Done
+        SummaryDisplay --> AutoCountdown: 6s Review
+        SummaryDisplay --> SaveScore: POST api/scores
     }
 
     state LeaderboardScreen {
-        AutoCountdown --> HallOfFame: Displays Top 10 Champions
-        HallOfFame --> WelcomeScreen: Touch "DONE"
-        HallOfFame --> RegistrationScreen: Touch "NEXT PLAYER"
-        HallOfFame --> AdminDialog: Touch "RESET HALL OF FAME"
+        AutoCountdown --> HallOfFame
+        HallOfFame --> WelcomeScreen: Touch Done
+        HallOfFame --> RegistrationScreen: Touch Next Player
+        HallOfFame --> AdminDialog: Touch Reset
     }
 
     state AdminDialog {
-        EnterPIN --> VerifyPIN: Enter Protected PIN
-        VerifyPIN --> ClearedLeaderboard: Valid PIN (Resets leaderboard.json)
-        VerifyPIN --> EnterPIN: Invalid PIN Error
+        EnterPIN --> VerifyPIN
+        VerifyPIN --> ClearedLeaderboard: Valid PIN
+        VerifyPIN --> EnterPIN: Invalid PIN
         ClearedLeaderboard --> HallOfFame
     }
 ```
+
+</details>
 
 ---
 
@@ -148,10 +152,10 @@ stateDiagram-v2
 
 ```mermaid
 flowchart LR
-    A["Raw Serial Bytes<br/>(47-byte Packet @ 230400 Baud)"] --> B["Header & CRC8<br/>Validation (0x54, 0x2C)"]
-    B --> C["Polar-to-Cartesian<br/>x = X_sensor + d·sin(θ)<br/>y = Y_sensor + d·cos(θ)"]
-    C --> D["Wall Boundary & Deadzones<br/>X: 4\" to 145\" (149\" Total)<br/>Y: 0\" to 80\""]
-    D --> E["Spatial Clustering<br/>Euclidean Grouping<br/>(Min 2 Pts, Dist < 3.5\")"]
+    A["Raw Serial Bytes<br/>(47-byte Packet at 230400 Baud)"] --> B["Header and CRC8<br/>Validation (0x54, 0x2C)"]
+    B --> C["Polar-to-Cartesian<br/>x = X_sensor + d * sin(θ)<br/>y = Y_sensor + d * cos(θ)"]
+    C --> D["Wall Boundary and Deadzones<br/>X: 4 to 145 inches (149 total)<br/>Y: 0 to 80 inches"]
+    D --> E["Spatial Clustering<br/>Euclidean Grouping<br/>(Min 2 Points, Dist &lt; 3.5 in)"]
     E --> F["Touch State Machine<br/>• touch_down (New)<br/>• touch_move (Delta)<br/>• touch_up (Release)"]
     F --> G["UDP 127.0.0.1:5005<br/>JSON Dispatch"]
     G --> H["server.py SSE Bridge<br/>/api/events"]
@@ -173,15 +177,15 @@ flowchart TD
     LoadCache --> HistCheck["Check question_history.json<br/>for category:difficulty"]
     HistCheck --> Filter["Split Pool into:<br/>1. Fresh Non-Repeats<br/>2. History Items"]
 
-    Filter --> CountCheck{"Are Fresh Items >= 20?"}
+    Filter --> CountCheck{"Are Fresh Items &gt;= 20?"}
     CountCheck -->|Yes| PickFresh["Select 20 Fresh Items"]
     CountCheck -->|No| Mix["Take all Fresh +<br/>at most 5 History Repeats"]
 
     PickFresh --> Balance["Answer Balancer Engine"]
     Mix --> Balance
 
-    subgraph Balancer["⚖️ Exact Answer Distribution (20 Questions)"]
-        Balance --> Slots["Target Slots Array:<br/>[0,0,0,0,0, 1,1,1,1,1, 2,2,2,2,2, 3,3,3,3,3]"]
+    subgraph Balancer["Exact Answer Distribution (20 Questions)"]
+        Balance --> Slots["Target Slots Array: Exactly 5 A, 5 B, 5 C, 5 D"]
         Slots --> Shuffle["Shuffle Slots Randomly"]
         Shuffle --> Distribute["Assign Correct Answer to Slot<br/>5 in Option A (0)<br/>5 in Option B (1)<br/>5 in Option C (2)<br/>5 in Option D (3)"]
     end
@@ -192,6 +196,8 @@ flowchart TD
 ---
 
 ## 📐 Physical Wall & Calibration Dimensions
+
+![Wall Calibration](assets/wall_calibration.svg)
 
 The interactive station is calibrated for the following standard physical setup:
 
@@ -206,26 +212,16 @@ The interactive station is calibrated for the following standard physical setup:
 | **Digital Stage Resolution** | `1490 × 800 px` | 10 pixels per inch (PPI = 10) |
 | **Stage Auto-Scaling** | Fullscreen proportional `scale(s)` | Automatically scales to any display |
 
-```
-|<--------------------------------- 149 INCHES --------------------------------->|
-+-------------------+-----------------------------------------+-------------------+
-|   4" DEAD ZONE    |         141" ACTIVE TOUCH AREA          |   4" DEAD ZONE    |
-| (Ignored Touches) |                                         | (Ignored Touches) |
-|                   |                                         |                   |
-|                   |                    ★                    |                   |
-|                   |           LD19 Sensor (Y = 38")         |                   |
-|                   |                                         |                   |
-|                   |                                         |                   |
-+-------------------+-----------------------------------------+-------------------+
-0"                  4"                                        145"               149"
-```
-
 ---
 
 ## 🗂️ Project File Structure
 
 ```
 interactive-quiz-station/
+├── assets/                 # High-resolution vector diagrams
+│   ├── architecture.svg    # System & component architecture
+│   ├── game_flow.svg       # 7-Screen user journey flow
+│   └── wall_calibration.svg # Physical 149" x 80" wall layout
 ├── index.html              # 7-Screen Web UI, 1490x800 Stage, LiDAR Touch Engine
 ├── server.py               # HTTP REST Server, SSE Bridge, UDP Ingest, Leaderboard Store
 ├── question_provider.py    # Trivia API fetcher, 180+ Fallbacks, Repeat Guard, Answer Balancer
@@ -373,4 +369,3 @@ The Hall of Fame reset is protected:
 
 ## 📄 License
 MIT License — Free to use, adapt, and deploy for educational and commercial interactive installations.
-

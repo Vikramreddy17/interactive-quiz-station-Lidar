@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050e1d"/>
+      <stop offset="100%" stop-color="#0a1d35"/>
+    </linearGradient>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#ffffff0a" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1000" height="480" rx="14" fill="url(#bg)" stroke="#234368" stroke-width="2"/>
+
+  <!-- Title -->
+  <text x="40" y="45" font-family="'Segoe UI', Arial" font-weight="900" font-size="22" fill="#ffffff">📐 PHYSICAL PROJECTION WALL &amp; LIDAR SENSOR CALIBRATION</text>
+  <text x="40" y="70" font-family="'Segoe UI', Arial" font-size="13" fill="#8faecf">149.0" Wide × 80.0" High (3785 × 2032 mm) with 4.0" Left and Right Dead Zones</text>
+
+  <!-- Wall Frame -->
+  <g transform="translate(60, 100)">
+    <!-- Overall Wall (880 x 280 in SVG scale) -->
+    <!-- Total width: 880px = 149 inches -> ~5.9 px per inch -->
+    <!-- Dead left: 4 inches = ~24px -->
+    <!-- Dead right: 4 inches = ~24px -->
+    <!-- Active width: 141 inches = ~832px -->
+    <!-- Height: 80 inches = ~280px -->
+
+    <!-- Outer Wall Canvas -->
+    <rect x="0" y="0" width="880" height="280" rx="6" fill="#07192f" stroke="#375a85" stroke-width="2"/>
+    <rect x="0" y="0" width="880" height="280" fill="url(#grid)" />
+
+    <!-- Left Dead Zone -->
+    <rect x="0" y="0" width="26" height="280" fill="#421927" opacity="0.85" stroke="#75293d" stroke-width="1.5"/>
+    <text x="13" y="145" font-family="'Segoe UI', Arial" font-size="9" font-weight="800" fill="#ff7187" text-anchor="middle" transform="rotate(-90 13 145)">4" DEAD ZONE</text>
+
+    <!-- Right Dead Zone -->
+    <rect x="854" y="0" width="26" height="280" fill="#421927" opacity="0.85" stroke="#75293d" stroke-width="1.5"/>
+    <text x="867" y="145" font-family="'Segoe UI', Arial" font-size="9" font-weight="800" fill="#ff7187" text-anchor="middle" transform="rotate(90 867 145)">4" DEAD ZONE</text>
+
+    <!-- Active Wall Area -->
+    <rect x="26" y="0" width="828" height="280" fill="none" stroke="#4bdfee" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <text x="440" y="30" font-family="'Segoe UI', Arial" font-size="14" font-weight="800" fill="#4bdfee" text-anchor="middle">ACTIVE TOUCH AREA: 141.0 INCHES (3,581 mm)</text>
+    <text x="440" y="50" font-family="'Segoe UI', Arial" font-size="11" fill="#88a9c7" text-anchor="middle">Mapped 1:1 to 1490 × 800 Stage (10 Pixels Per Inch)</text>
+
+    <!-- Sensor Placement (X = Center 440, Y = 38 inches = 133px from top) -->
+    <circle cx="440" cy="133" r="14" fill="#143452" stroke="#ffd071" stroke-width="2.5"/>
+    <circle cx="440" cy="133" r="5" fill="#ffd071"/>
+    <text x="440" y="165" font-family="'Segoe UI', Arial" font-size="11" font-weight="800" fill="#ffd071" text-anchor="middle">LD19 SENSOR (Y = 38.0")</text>
+
+    <!-- Scanning Laser Curtain Simulation -->
+    <path d="M 440 133 L 40 260" stroke="#ff7187" stroke-width="1.5" opacity="0.4" stroke-dasharray="2 2"/>
+    <path d="M 440 133 L 840 260" stroke="#ff7187" stroke-width="1.5" opacity="0.4" stroke-dasharray="2 2"/>
+    <path d="M 440 133 L 440 270" stroke="#ff7187" stroke-width="1.5" opacity="0.4" stroke-dasharray="2 2"/>
+
+    <!-- Simulated Touch Hit -->
+    <g transform="translate(620, 180)">
+      <circle cx="0" cy="0" r="18" fill="none" stroke="#38e5b0" stroke-width="2.5"/>
+      <circle cx="0" cy="0" r="4" fill="#ffd071"/>
+      <text x="0" y="-24" font-family="'Segoe UI', Arial" font-size="11" font-weight="800" fill="#38e5b0" text-anchor="middle">👆 TOUCH DETECTED</text>
+      <text x="0" y="32" font-family="'Segoe UI', Arial" font-size="9" fill="#9ec0dc" text-anchor="middle">X: 104.2"  Y: 51.5"</text>
+    </g>
+
+    <!-- Dimension arrows -->
+    <!-- Width Dimension -->
+    <line x1="0" y1="-15" x2="880" y2="-15" stroke="#8ba8c4" stroke-width="1.5"/>
+    <polygon points="0,-15 8,-12 8,-18" fill="#8ba8c4"/>
+    <polygon points="880,-15 872,-12 872,-18" fill="#8ba8c4"/>
+    <text x="440" y="-22" font-family="'Segoe UI', Arial" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle">TOTAL WALL WIDTH: 149.0 INCHES</text>
+
+    <!-- Height Dimension -->
+    <line x1="-15" y1="0" x2="-15" y2="280" stroke="#8ba8c4" stroke-width="1.5"/>
+    <polygon points="-15,0 -12,8 -18,8" fill="#8ba8c4"/>
+    <polygon points="-15,280 -12,272 -18,272" fill="#8ba8c4"/>
+    <text x="-22" y="145" font-family="'Segoe UI', Arial" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle" transform="rotate(-90 -22 145)">HEIGHT: 80.0"</text>
+  </g>
+</svg>
