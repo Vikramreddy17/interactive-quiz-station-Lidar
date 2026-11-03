@@ -373,3 +373,4 @@ The Hall of Fame reset is protected:
 
 ## 📄 License
 MIT License — Free to use, adapt, and deploy for educational and commercial interactive installations.
+
